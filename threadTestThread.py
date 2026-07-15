@@ -132,7 +132,7 @@ class ParsedWorker(QObject):
                     if length == 0:
                         payload = b''
                         if cmd == 0x82:
-                            parsed_text = "开始采集命令握手：开始采集握手"
+                            parsed_text = "开始采集命令握手：开始采集握"
                         if cmd == 0x83:
                             parsed_text = "停止采集命令握手：停止采集握手"
                     else:
