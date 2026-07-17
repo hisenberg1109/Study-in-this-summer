@@ -1,9 +1,7 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
-
 app = FastAPI()
 student_info = {}
-
 @app.get('/index', response_class=HTMLResponse)
 def index():
     html = '''
@@ -46,13 +44,14 @@ def sign(
     name: str = Form(), 
     student_id: str = Form()
 ):
-    if student_info.get('name',0):
-        student_info[name]=student_id
+    if not student_info.get(name, 0):
+        student_info[name] = student_id
     else:
-        return f'{name}重复签到了'
+        return f'{name} 重复签到了'
+    
     all_output = ''
     for student in student_info:
-        all_output = (all_output
-                      + '\n' + f'姓名:{student},学号:{student_id}')
-
-    return f'姓名:{name}, 学号:{student_id}'
+        all_output = (all_output 
+                      + '\n' + f'姓名:{student}, 学号: {student_info[student]}'
+        )
+    return all_output
