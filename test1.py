@@ -1,13 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
 
+app = FastAPI()
 
-app=FastAPI()
-@app.get('/index',response_class=HTMLResponse)
+@app.get('/index', response_class=HTMLResponse)
 def index():
-    html  =  '''
-
-<!DOCTYPE html>
+    html = '''
+    <!DOCTYPE html>
     <html lang="zh-CN">
     <head>
         <meta charset="UTF-8">
@@ -38,7 +37,12 @@ def index():
         </div>
     </body>
     </html>
+    '''
+    return html
 
-'''
-    return html 
-    
+@app.post('/sign', response_class=HTMLResponse)
+def sign(
+    name: str = Form(), 
+    student_id: str = Form()
+):
+    return f'姓名:{name}, 学号:{student_id}'
